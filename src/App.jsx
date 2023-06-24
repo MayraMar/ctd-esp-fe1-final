@@ -5,10 +5,15 @@ import PaginaInicio from "./paginas/Inicio.pagina";
 import PaginaFavoritos from "./paginas/Favoritos.pagina";
 import PaginaDetalle from "./paginas/Detalle.pagina";
 import Encabezado from "./componentes/layout/encabezado.componente";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 function App() {
+
+  const queryClient=new QueryClient();
+
   return (
-    <div className="App">
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
       <Encabezado />
       <Routes>
         <Route path="/" element={<PaginaInicio />} />
@@ -16,6 +21,7 @@ function App() {
         <Route path="detalle" element={<PaginaDetalle />} />
       </Routes>
     </div>
+    </QueryClientProvider>
   );
 }
 
