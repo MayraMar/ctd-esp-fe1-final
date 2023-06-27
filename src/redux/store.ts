@@ -1,13 +1,17 @@
 
 import { configureStore } from "@reduxjs/toolkit";
+import { personajesSlice } from "./personajesSlice";
+import { pageSlice } from "./pageSlice";
+import { favoritosSlice } from "./favoritosSlice";
 //import contadorReducer from "./contadorSlice";
 //import { contadorSlice } from "./contadorSlice";
 //import { tareasSlice } from "./tareasSlice";
 
 export const store= configureStore({
     reducer: {
-        // counter: contadorSlice.reducer, 
-        // tareas: tareasSlice.reducer
+        personajes:personajesSlice.reducer,
+        page:pageSlice.reducer,
+        favoritos: favoritosSlice.reducer
     }
     
 })
