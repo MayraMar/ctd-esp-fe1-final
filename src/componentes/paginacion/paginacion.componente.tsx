@@ -1,7 +1,6 @@
 import "./paginacion.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { nextPage, previousPage } from "../../redux/pageSlice";
-
 import { setPending } from "../../redux/personajesSlice";
 /**
  * Componente que contiene los botones para paginar
@@ -16,13 +15,13 @@ const Paginacion = () => {
   const actualPage = useAppSelector((state) => state.page.page);
   const totalPages = useAppSelector((state) => state.page.totalPages);
 
-  const handlePrevious = (e) => {
+  const handlePrevious = () => {
     if (actualPage > 1) {
       dispatch(previousPage());
       dispatch(setPending);
     }
   };
-  const handleNext = (e) => {
+  const handleNext = () => {
     if (actualPage < totalPages) {
       dispatch(nextPage());
       dispatch(setPending);
@@ -31,10 +30,18 @@ const Paginacion = () => {
 
   return (
     <div className="paginacion">
-      <button onClick={handlePrevious} disabled={actualPage===1 ? true : false} className={"primary"}>
+      <button
+        onClick={handlePrevious}
+        disabled={actualPage === 1 ? true : false}
+        className={"primary"}
+      >
         Anterior
       </button>
-      <button onClick={handleNext} disabled={actualPage===totalPages ? true : false} className={"primary"}>
+      <button
+        onClick={handleNext}
+        disabled={actualPage === totalPages ? true : false}
+        className={"primary"}
+      >
         Siguiente
       </button>
     </div>
