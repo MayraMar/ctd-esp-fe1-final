@@ -16,10 +16,10 @@ import { setTotalPages } from "../../redux/pageSlice";
  */
 const GrillaPersonajes = () => {
   const dispatch = useAppDispatch();
-  const actualPage = useAppSelector((state) => state.page.page);
-  const searchParam = useAppSelector((state) => state.personajes.searchParam);
+  const actualPage: number = useAppSelector((state) => state.page.page);
+  const searchParam: string = useAppSelector((state) => state.personajes.searchParam);
 
-  const personajes = useAppSelector((state) => state.personajes);
+  const personajes: Personaje[] = useAppSelector((state) => state.personajes.personajes);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["personajes", actualPage, searchParam],
@@ -37,13 +37,9 @@ const GrillaPersonajes = () => {
     dispatch(setTotalPages(data.info.pages));
     return (
       <div className="grilla-personajes">
-        {/* {console.log(personajes)} */}
-        {/* <h1>h1 {console.log("isLoadinfg", isLoading, "error", error, data)}</h1> */}
-        {personajes.personajes.map((personaje) => (
+        {personajes.map((personaje) => (
           <TarjetaPersonaje
             key={personaje.id}
-            // name={personaje.name}
-            // image={personaje.image}
             personaje={personaje}
             fav={false}
           />

@@ -1,5 +1,6 @@
 import { agregarPersonaje, quitarPersonaje } from "../../redux/favoritosSlice";
 import { useAppDispatch } from "../../redux/hooks";
+import { Personaje } from "../../types/types";
 import BotonFavorito from "../botones/boton-favorito.componente";
 import "./tarjeta-personaje.css";
 import { useState } from "react";
@@ -12,7 +13,14 @@ import { useState } from "react";
  *
  * @returns un JSX element
  */
-const TarjetaPersonaje = (props) => {
+
+interface TarjetaProps {
+ key: number,
+ personaje: Personaje,
+ fav: boolean
+}
+
+const TarjetaPersonaje = (props: TarjetaProps) => {
   const dispatch = useAppDispatch();
   const [isFav, setFav] = useState(props.fav);
 
