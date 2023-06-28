@@ -26,12 +26,11 @@ export const buscarPorNombre = async (
 export const buscarPersonajes = async (
   page: number,
   nombre?: string
-): Promise<Personaje[]> => {
+): Promise<PersonajesResponse> => {
   let params = "";
   if (nombre) {
     params += `&name=${nombre}`;
   }
-  // /?page=2&name=rick&status=alive
   return fetch(`${baseUrl}/?page=${page}${params}`)
     .then((data) => data.json())
     .then((data) => data);

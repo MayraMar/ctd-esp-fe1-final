@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Personaje, PersonajesResponse } from "../types/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { buscarTodos } from "../services/personajes.service";
+import { buscarTodos, buscarPersonajes } from "../services/personajes.service";
 
 interface PersonajesState {
   personajes: Personaje[],
@@ -15,23 +15,13 @@ const initialState: PersonajesState = {
   searchParam:""
 };
 
-export const guardarPersonajesT = createAsyncThunk("personajes/saveAll", buscarTodos);
+//export const guardarPersonajesT = createAsyncThunk("personajes/saveAll", (page: number, param)=>buscarPersonajes(page, param));
 
 export const personajesSlice = createSlice({
   name: "personajes",
   initialState,
   reducers: {
-    // filtrarPersonajes: (state, action: PayloadAction<string>) => {
-    //   state.personajes = state.personajes.filter((personaje) =>
-    //     {
-    //       personaje.name.includes(action.payload);
-    //       state.status="ready";
-    //     }
-    //   );
-    // },
-    marcarFavorito: (state, action: PayloadAction<number>) => {
-      //state.tareas=state.tareas.filter(tarea=>tarea!==action.payload)
-    },
+ 
     guardarPersonajes:(state, action: PayloadAction<Personaje[]>)=>{
         state.personajes=action.payload;
         state.status="ready";
@@ -41,15 +31,24 @@ export const personajesSlice = createSlice({
       state.searchParam=action.payload;
     }
   },
-  extraReducers: (builder) => {
-    builder.addCase(
-      guardarPersonajesT.fulfilled,
-      (state, action: PayloadAction<PersonajesResponse>) => {
-        state.personajes = action.payload.results;
-        state.status="succeeded"
-      }
-    );
-  },
+  // extraReducers: (builder) => {
+  //   builder
+  //   .addCase(
+  //     guardarPersonajesT.fulfilled,
+  //     (state, action: PayloadAction<PersonajesResponse>) => {
+  //       state.personajes = action.payload.results;
+  //       state.status="succeeded"
+  //     }
+  //   )
+  //   .addCase(
+  //     guardarPersonajesT.pending,
+  //     (state, action: PayloadAction<PersonajesResponse>) => {
+        
+  //       state.status="pending"
+  //     }
+  //   );
+  // },
 });
 
-export const { marcarFavorito, guardarPersonajes, setPending, setSearchParam } = personajesSlice.actions;
+export const { guardarPersonajes, setPending, setSearchParam } = personajesSlice.actions;
+export default personajesSlice

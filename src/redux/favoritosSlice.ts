@@ -1,8 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Personaje, PersonajesResponse } from "../types/types";
+import { Personaje } from "../types/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { buscarTodos } from "../services/personajes.service";
-
 interface FavoritosState {
   personajesFavoritos: Personaje[],
 }
@@ -10,7 +8,6 @@ interface FavoritosState {
 const initialState: FavoritosState = {
   personajesFavoritos: [],
 };
-
 
 export const favoritosSlice = createSlice({
   name: "personajesFavoritos",

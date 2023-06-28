@@ -1,6 +1,7 @@
 import "./paginacion.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { nextPage, previousPage } from "../../redux/pageSlice";
+
 import { setPending } from "../../redux/personajesSlice";
 /**
  * Componente que contiene los botones para paginar

@@ -1,4 +1,3 @@
-import GrillaPersonajes from "../componentes/personajes/grilla-personajes.componente";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import TarjetaPersonaje from "../componentes/personajes/tarjeta-personaje.componente";
 import "../componentes/personajes/grilla-personajes.css";
@@ -17,7 +16,7 @@ const PaginaFavoritos = () => {
   );
   const dispatch = useAppDispatch();
 
-  const handleEliminar= ()=>dispatch(eliminarFavoritos())
+  const handleEliminar = () => dispatch(eliminarFavoritos());
   return (
     <div className="container">
       <div className="actions">
@@ -26,15 +25,12 @@ const PaginaFavoritos = () => {
           Eliminar Favoritos
         </button>
       </div>
-      {/* <GrillaPersonajes /> */}
       <div className="grilla-personajes">
         {personajesFavoritos.map((personaje) => (
           <TarjetaPersonaje
             key={personaje.id}
-            // name={personaje.name}
-            // image={personaje.image}
             personaje={personaje}
-            fav={true}
+            fav={true} // sacar el valor del localStorage
           />
         ))}
       </div>
