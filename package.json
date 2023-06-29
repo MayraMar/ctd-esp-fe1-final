@@ -2,7 +2,6 @@
   "name": "ctd-esp-fe1-final",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://mayramar.github.io/ctd-esp-fe1-final",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.29.15",
