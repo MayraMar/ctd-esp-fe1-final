@@ -8,7 +8,7 @@ import './boton-favorito.css';
  * @returns un JSX element 
  */
 const BotonFavorito = ({esFavorito, onClick}) => {
-    const src = esFavorito ? "/imagenes/star-filled.png" : "/imagenes/star.png"
+    const src = esFavorito==="isFav" ? "/imagenes/star-filled.png" : "/imagenes/star.png"
 
     return <div className="boton-favorito">
         <img src={src} alt={"favorito"} onClick={onClick} />

@@ -1,24 +1,27 @@
-import {PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-type InitialState={
-  page: number,
-  totalPages:number
-}
-const initialState: InitialState = {page :1, totalPages:1}
+type InitialState = {
+  page: number;
+};
+const initialState: InitialState = { page: 1 };
 
 export const pageSlice = createSlice({
   name: "page",
   initialState,
   reducers: {
     nextPage: (state) => {
-      state.page++
+      state.page++;
     },
     previousPage: (state) => {
       state.page--;
     },
-    setTotalPages: (state, action:PayloadAction<number>)=>{state.totalPages=action.payload}
+    /**
+     * Función que setea la página a 1.
+     * @param state
+     * @returns 
+     */
+    setInitialState:(state)=> initialState
   },
-  
 });
 
-export const { nextPage, previousPage, setTotalPages } = pageSlice.actions;
+export const { nextPage, previousPage, setInitialState } = pageSlice.actions;

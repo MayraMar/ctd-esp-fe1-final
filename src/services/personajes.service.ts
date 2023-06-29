@@ -31,7 +31,14 @@ export const buscarPersonajes = async (
   if (nombre) {
     params += `&name=${nombre}`;
   }
-  return fetch(`${baseUrl}/?page=${page}${params}`)
-    .then((data) => data.json())
-    .then((data) => data);
+  return fetch(`${baseUrl}/?page=${page}${params}`).then((data) => {
+    if (data.status === 404) {
+      return {
+        info: { count: 0, pages: 0, next: null, prev: null },
+        results: [{}],
+      };
+    }
+    return data.json();
+  });
+  //.then((data) =>  data);
 };

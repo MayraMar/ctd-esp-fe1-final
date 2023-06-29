@@ -15,13 +15,15 @@ export const favoritosSlice = createSlice({
   reducers: {
     agregarPersonaje: (state, action: PayloadAction<Personaje>) => {
       state.personajesFavoritos.push(action.payload);
+      localStorage.setItem(action.payload.id as unknown as string, "isFav")
     },
     quitarPersonaje: (state, action: PayloadAction<number>) => {
-      console.log("action payload:", action.payload)
-      state.personajesFavoritos=state.personajesFavoritos.filter(personaje=>personaje.id!==action.payload)
+      state.personajesFavoritos=state.personajesFavoritos.filter(personaje=>personaje.id!==action.payload);
+      localStorage.removeItem(action.payload as unknown as string)
     },
     eliminarFavoritos: (state)=>{
       state.personajesFavoritos=[];
+      localStorage.clear();
     }
     
   },

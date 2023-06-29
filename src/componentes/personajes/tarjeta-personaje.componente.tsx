@@ -24,6 +24,11 @@ const TarjetaPersonaje = (props: TarjetaProps) => {
   const dispatch = useAppDispatch();
   const [isFav, setFav] = useState(props.fav);
 
+  /**
+   * Función que maneja el click en la estrella de favoritos.
+   * Verifica el estado de la tarjeta: si es favorito, lo quita; y si no lo es, lo suma al listado de favoritos.
+   * La variable isFav se utiliza asimismo para darle estilo al botón.
+   */
   const handleClick = () => {
     if (isFav) {
       setFav(false);
@@ -39,7 +44,7 @@ const TarjetaPersonaje = (props: TarjetaProps) => {
       <img src={props.personaje.image} alt="Rick Sanchez" />
       <div className="tarjeta-personaje-body">
         <span>{props.personaje.name}</span>
-        <BotonFavorito esFavorito={isFav} onClick={handleClick} />
+        <BotonFavorito esFavorito={localStorage.getItem(props.personaje.id as unknown as string)} onClick={handleClick} />
       </div>
     </div>
   );

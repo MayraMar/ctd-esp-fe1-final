@@ -1,11 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
+//import { useQuery } from "@tanstack/react-query";
 import "./grilla-personajes.css";
 import TarjetaPersonaje from "./tarjeta-personaje.componente";
-import { buscarPersonajes } from "../../services/personajes.service";
-import { Personaje } from "../../types/types";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { guardarPersonajes } from "../../redux/personajesSlice";
-import { setTotalPages } from "../../redux/pageSlice";
+import { useEffect } from "react";
+import { guardarPersonajesT } from "../../redux/personajesSlice";
+
 /**
  * Grilla de personajes para la pagina de inicio
  *
@@ -17,24 +16,29 @@ import { setTotalPages } from "../../redux/pageSlice";
 const GrillaPersonajes = () => {
   const dispatch = useAppDispatch();
   const actualPage: number = useAppSelector((state) => state.page.page);
-  const searchParam: string = useAppSelector((state) => state.personajes.searchParam);
+  const searchParam: string = useAppSelector(
+    (state) => state.personajes.searchParam
+  );
 
-  const personajes: Personaje[] = useAppSelector((state) => state.personajes.personajes);
+  const { personajes, status } = useAppSelector((state) => state.personajes);
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["personajes", actualPage, searchParam],
-    queryFn: () => buscarPersonajes(actualPage, searchParam),
-  });
+  useEffect(() => {
+    dispatch(guardarPersonajesT({ page: actualPage, param: searchParam }));
+  }, [actualPage, searchParam, dispatch]);
 
-  if (isError) {
-    console.log("error", error);
+  // const { data, isLoading, isError, error } = useQuery({
+  //   queryKey: ["personajes", actualPage, searchParam],
+  //   queryFn: () => buscarPersonajes(actualPage, searchParam),
+  // });
+  
+  if (status === "pending") {
+    <h3>Cargando personajes...</h3>;
+  } 
+
+  if (status === "rejected") {
+    return <h3>Error en la búsqueda. No se encontró a "{searchParam}".</h3>;
   }
-  if (isLoading) {
-    console.log("loading", isLoading);
-  }
-  if (data) {
-    dispatch(guardarPersonajes(data.results));
-    dispatch(setTotalPages(data.info.pages));
+
     return (
       <div className="grilla-personajes">
         {personajes.map((personaje) => (
@@ -44,9 +48,9 @@ const GrillaPersonajes = () => {
             fav={false}
           />
         ))}
+        ;
       </div>
     );
   }
-};
 
 export default GrillaPersonajes;

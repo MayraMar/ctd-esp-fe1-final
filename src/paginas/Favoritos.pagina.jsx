@@ -15,12 +15,16 @@ const PaginaFavoritos = () => {
     (state) => state.favoritos.personajesFavoritos
   );
   const dispatch = useAppDispatch();
-
+/**
+ * Función handleEliminar, elimina todos los favoritos al clickear el botón correspondiente.
+ * Trabaja mediante un dispatcher, llamando a la función eliminar Favoritos en el Slice.
+ * @returns void
+ */
   const handleEliminar = () => dispatch(eliminarFavoritos());
   return (
     <div className="container">
       <div className="actions">
-        <h3>Personajes Favoritos{console.log(personajesFavoritos)}</h3>
+        <h3>Personajes Favoritos</h3>
         <button className="danger" onClick={handleEliminar}>
           Eliminar Favoritos
         </button>
